@@ -22,12 +22,14 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Error: " + err.Error() + "\n"))
+		return
 	}
 
 	err, result := Loader(lines, Load)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("Error: " + err.Error() + "\n"))
+		return
 	}
 
 	w.Write([]byte(strings.Join(result, "\n")))
